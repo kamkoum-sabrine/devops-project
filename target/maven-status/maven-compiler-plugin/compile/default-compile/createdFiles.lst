@@ -1,0 +1,6 @@
+com\enicarthage\devops_project\metrics\MetricsService.class
+com\enicarthage\devops_project\filter\RequestLoggingFilter.class
+com\enicarthage\devops_project\controller\TaskController.class
+com\enicarthage\devops_project\DevopsProjectApplication.class
+com\enicarthage\devops_project\model\Task.class
+com\enicarthage\devops_project\controller\TaskController$1.class
