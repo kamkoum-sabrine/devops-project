@@ -43,11 +43,12 @@ public class TaskController {
         return tasks;
     }
 
-    // ----------------------------
+    // -----------------------
     // Endpoint /metrics
-    // ----------------------------
+    // -----------------------
     @GetMapping("/metrics")
     public Object metrics() {
+
 
         return new Object() {
             public final long requestCount = metricsService.getRequestCount();
