@@ -37,3 +37,21 @@ jobs:
         with:
           name: surefire-test-report
           path: target/surefire-reports/
+  deploy:
+    name: Deploy (waiting for Docker)
+    runs-on: ubuntu-latest
+    needs: build-and-test
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Docker build (placeholder)
+        run: echo "Dockerfile not ready yet"
+
+      - name: Push Docker image (placeholder)
+        run: echo "Docker Hub push will be added later"
+
+      - name: Kubernetes deploy (placeholder)
+        run: echo "K8s deployment will be added later"
+
