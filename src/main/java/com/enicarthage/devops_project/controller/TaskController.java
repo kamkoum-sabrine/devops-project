@@ -48,6 +48,7 @@ public class TaskController {
     // ----------------------------
     @GetMapping("/metrics")
     public Object metrics() {
+        
         return new Object() {
             public final long requestCount = metricsService.getRequestCount();
             public final long avgResponseTimeMs = metricsService.getAvgResponseTime();
