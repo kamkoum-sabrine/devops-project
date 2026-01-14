@@ -34,7 +34,7 @@ public class RequestLoggingFilter extends OncePerRequestFilter {
 
         long duration = System.currentTimeMillis() - startTime;
 
-        metricsService.record(duration);
+        metricsService.recordRequest(duration);
 
         System.out.println(
                 "traceId=" + traceId +

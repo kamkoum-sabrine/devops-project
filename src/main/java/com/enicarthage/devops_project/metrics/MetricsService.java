@@ -1,25 +1,26 @@
 package com.enicarthage.devops_project.metrics;
 
-
 import org.springframework.stereotype.Service;
+
+import java.util.concurrent.atomic.AtomicLong;
 
 @Service
 public class MetricsService {
 
-    private long requestCount = 0;
-    private long totalResponseTimeMs = 0;
+    private final AtomicLong requestCount = new AtomicLong(0);
+    private final AtomicLong totalResponseTimeMs = new AtomicLong(0);
 
-    public synchronized void record(long durationMs) {
-        requestCount++;
-        totalResponseTimeMs += durationMs;
+    public void recordRequest(long responseTimeMs) {
+        requestCount.incrementAndGet();
+        totalResponseTimeMs.addAndGet(responseTimeMs);
     }
 
     public long getRequestCount() {
-        return requestCount;
+        return requestCount.get();
     }
 
     public long getAvgResponseTime() {
-        return requestCount == 0 ? 0 : totalResponseTimeMs / requestCount;
+        long count = requestCount.get();
+        return count == 0 ? 0 : totalResponseTimeMs.get() / count;
     }
 }
-
