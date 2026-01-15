@@ -1,6 +1,8 @@
 FROM eclipse-temurin:17-jdk-alpine
 
 WORKDIR /app
+RUN useradd -m appuser
+USER appuser
 
 COPY target/*.jar app.jar
 
