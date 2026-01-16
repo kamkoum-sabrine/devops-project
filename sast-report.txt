@@ -1,0 +1,75 @@
+                   
+                   
+┌─────────────────┐
+│ 6 Code Findings │
+└─────────────────┘
+                                  
+  [36m[22m[24m  deployment.yaml[0m
+     ❱ [1myaml.kubernetes.security.run-as-non-root.run-as-non-root[0m
+          When running containers in Kubernetes, it's important to ensure that they  are  
+          properly secured to prevent privilege escalation attacks.  One potential        
+          vulnerability is when a container is allowed to run  applications as the root   
+          user, which could allow an attacker to gain  access to sensitive resources. To  
+          mitigate this risk, it's recommended to  add a `securityContext` to the         
+          container, with the parameter `runAsNonRoot`  set to `true`. This will ensure   
+          that the container runs as a non-root user,  limiting the damage that could be  
+          caused by any potential attacks. By  adding a `securityContext` to the container
+          in your Kubernetes pod, you can  help to ensure that your containerized         
+          applications are more secure and  less vulnerable to privilege escalation       
+          attacks.                                                                        
+          Details: https://sg.run/dgP5                                                    
+                                                                                          
+           [32m▶▶┆ Autofix ▶ [0mspec: securityContext: runAsNonRoot: true #
+           14┆ spec:
+   
+    ❯❱ [1myaml.kubernetes.security.allow-privilege-escalation-no-securitycontext.allow-privilege-[0m
+  [1m     escalation-no-securitycontext[0m                                                          
+          In Kubernetes, each pod runs in its own isolated environment with its own set of 
+          security policies. However, certain container images may contain `setuid` or     
+          `setgid` binaries that could allow an attacker to perform privilege escalation   
+          and gain access to sensitive resources. To mitigate this risk, it's recommended  
+          to add a `securityContext` to the container in the pod, with the parameter       
+          `allowPrivilegeEscalation` set to `false`. This will prevent the container from  
+          running any privileged processes and limit the impact of any potential attacks.  
+          By adding a `securityContext` to your Kubernetes pod, you can help to ensure that
+          your containerized applications are more secure and less vulnerable to privilege 
+          escalation attacks.                                                              
+          Details: https://sg.run/eleR                                                     
+                                                                                           
+           [32m▶▶┆ Autofix ▶ [0msecurityContext: allowPrivilegeEscalation: false name
+           16┆ - name: devops-backend
+                                     
+  [36m[22m[24m  docker-compose.yml[0m
+    ❯❱ [1myaml.docker-compose.security.no-new-privileges.no-new-privileges[0m
+          Service 'prometheus' allows for privilege escalation via setuid or setgid
+          binaries. Add 'no-new-privileges:true' in 'security_opt' to prevent this.
+          Details: https://sg.run/0n8q                                             
+                                                                                   
+            4┆ prometheus:
+   
+    ❯❱ [1myaml.docker-compose.security.writable-filesystem-service.writable-filesystem-service[0m
+          Service 'prometheus' is running with a writable root filesystem. This may allow
+          malicious applications to download and run additional payloads, or modify      
+          container files. If an application inside a container has to save something    
+          temporarily consider using a tmpfs. Add 'read_only: true' to this service to   
+          prevent this.                                                                  
+          Details: https://sg.run/e4JE                                                   
+                                                                                         
+            4┆ prometheus:
+   
+    ❯❱ [1myaml.docker-compose.security.no-new-privileges.no-new-privileges[0m
+          Service 'grafana' allows for privilege escalation via setuid or setgid binaries.
+          Add 'no-new-privileges:true' in 'security_opt' to prevent this.                 
+          Details: https://sg.run/0n8q                                                    
+                                                                                          
+           14┆ grafana:
+   
+    ❯❱ [1myaml.docker-compose.security.writable-filesystem-service.writable-filesystem-service[0m
+          Service 'grafana' is running with a writable root filesystem. This may allow
+          malicious applications to download and run additional payloads, or modify   
+          container files. If an application inside a container has to save something 
+          temporarily consider using a tmpfs. Add 'read_only: true' to this service to
+          prevent this.                                                               
+          Details: https://sg.run/e4JE                                                
+                                                                                      
+           14┆ grafana:
