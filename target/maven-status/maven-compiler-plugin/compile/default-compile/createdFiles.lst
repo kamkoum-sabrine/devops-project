@@ -4,3 +4,6 @@ com\enicarthage\devops_project\controller\TaskController.class
 com\enicarthage\devops_project\DevopsProjectApplication.class
 com\enicarthage\devops_project\model\Task.class
 com\enicarthage\devops_project\controller\TaskController$1.class
+com\enicarthage\devops_project\logging\TraceIdFilter.class
+com\enicarthage\devops_project\config\WebConfig.class
+com\enicarthage\devops_project\metrics\MetricsInterceptor.class
